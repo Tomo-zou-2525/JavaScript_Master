@@ -1,70 +1,34 @@
-/*  thisのタイミング
-call(オブジェクトと関係のないスコープにいたとしても、callプロパティを使うことでthisが該当の命名変数・定数を探して出力してくれる)
-_18行目を参考に
+// 配列の基本
 
-apply(配列に対して使用する引数の形が[..., ..., ...]みたいになる)
-既に配列が用意されていて、引数としてそのまま使いたい場合なんかに便利
-_32行目を参考に
-
-bind(thisの値をある関数と永続的に結びつける)
-バグの原因にもなりやすいが、特定の場面で非常に便利
-例） 引数の値は変えたくないが、関数としての機能を新しくしたい場合などに使われる
-_46行目を参考に
+/*
+・0から始まる
+・異なるデータ型が混在できる
+・[]で入力し、取り出すときも[]
+・lengthプロパティで、要素の数を取り出すことができる
+・存在しないインデックス番号を追加すると、要素が増える。中身は指定しないとundefinedとなる
 */
 
-//call
+//破壊的なメソッド・新しい配列を返すメソッド＿やりながら覚えるしかない
+//面食らったが、メソッドは分割したもの、されたもの、両方出るから注意
+/*
+・pop     最後削除              ・concat    複数の配列をバラバラにして末尾に追加
+・push    最後追加              ・slice     元の配列から更に配列を作る＿(引数１: start 引数２: end)間の配列を作る
+・shift   頭追加                ・splice    突っ込んで増やす、または消す。＿(引数１:変更開始点  引数２: 削除する数  引数３:追加する要素)
+・unshift 頭削除                ・copyWithin  指定した場所をコピーして突っ込んで上書き_(引数１:どこコピー？  引数２: どこからコピー？  引数３:どこまでコピー？)
+・fill    複数の要素を指定＿Arrayと同時に使えば初期値も決めることができる
+・reverse  配列の要素を全て逆順に       ・sort   配列の並び替え
+*/
 
-const bruce = { name: "Bruce" };
-const monica = { name: "Monica" };
+let arr = new Array(5).fill(1); //lengthが５の配列を生成、初期値は全て１
 
-function update(birthYear, occupation) {
-  this.birthYear = birthYear;
-  this.job = occupation;
-}
+//配列の検索
 
-console.log(bruce);
-update.call(bruce, 1949, "singer");
-console.log(bruce);
+/*
+・indexOf     指定した値が合致する( === )要素を持つ最初のインデックスを返す__lastIndexOfもあるよ
+・findIndex   オブジェクトやら検索条件が細かく指定できる
+・find        findIndexと同じだが、返す結果が配列の中身
 
-console.log(monica);
-update.call(monica, 1942, "actress");
-console.log(monica);
-
-//apply
-
-const matt = { name: "Matt" };
-const nancy = { name: "Nancy" };
-
-function update(birthYear, occupation) {
-  this.birthYear = birthYear;
-  this.job = occupation;
-}
-
-console.log(matt);
-update.apply(matt, [1949, "singer"]);
-console.log(matt);
-
-console.log(nancy);
-update.apply(nancy, [1942, "actress"]);
-console.log(nancy);
-
-//bind
-
-const bob = { name: "Bob" };
-const kei = { name: "Kei" };
-
-function update(birthYear, occupation) {
-  this.birthYear = birthYear;
-  this.job = occupation;
-}
-
-const updateBob = update.bind(bob);
-
-console.log(bob);
-updateBob(bob, 1949, "singer");
-console.log(bob);
-
-console.log(kei);
-updateBob.call(kei, 1942, "actress");
-console.log(kei);
-console.log(bruce);
+ー配列内に特定の要素があるかどうか、それだけ知りたい場合
+.some     指定の条件があればtrue  なければfalse
+.every    動きはsomeと同じだが、everyは配列全体を検索する・１つでも条件にそぐわない要素があればfalseを返すので要素の前チェックには使えない
+*/
