@@ -19,6 +19,8 @@
 ・reverse  配列の要素を全て逆順に       ・sort   配列の並び替え
 */
 
+let a = a.slice[2.3];
+
 let arr = new Array(5).fill(1); //lengthが５の配列を生成、初期値は全て１
 
 //配列の検索
