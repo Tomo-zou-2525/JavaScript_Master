@@ -1,45 +1,26 @@
-/* 例外処理
-エラーが起きた際に適切な処置をとる動き
-エラーハンドリング
-*/
+// オブジェクトの基本;
+// カスタムコンストラクタ関数で作られたオブジェクト名は、最初は大文字にすべし
 
-//Errorオブジェクト、という組み込みの物がある＿主に例外処理に使われる
-const err = new Error("メールアドレスの形式が正しくありません");
+/* new演算子とコンストラクタ関数でのインスタンス化・及びネイティブコンストラクタでのオブジェクト化 */
+let myNumber = new Number(29);
+let myString = new String("Tomoya");
+let myBoolean = new Boolean(true);
+let myObject = new Object();
+let myArray = new Array("unko", "tinko");
+let myFunction = new Function("x", "y", "return x*y");
+let myDate = new Date();
+let myRegExp = new RegExp("\bt[a-z]+\b");
+let myError = new Error("Error!");
 
-//例外処理＿try...catch   if文のようなもので、tryで実行し、errorが起こればcatchで処理を実行する
+console.log(myNumber.constructor);
 
-//例外を明示的にスロー（throw）することもできる
+// 通常はリテラルを使用してオブジェクトを設定する
+let myFunction = function(x, y) {
+  return x * y;
+};
 
-//コールスタック...関数aが関数bを呼び関数cを呼び...何重にも行われる事がある。これをコールスタックという
-
-//エラーはどのコールスタックでも捉える事ができるが、これを特定できないと例外されない処理、と呼ばれる。この際、エラー情報は保持される
-//その際、大抵のJavaScript処理系では＿stack＿というプロパティが使用できる。
-
-/* イテレータ
-反復可能な概念
-反復可能なオブジェクト、と、イテレータ的な要素の2つがある
-これは、配列は反復可能であり、イテレータ的ではないことを指す
-*/
-
-/* generate
-特殊な関数のようなもの
-使用には * が付き、呼び出しにはyieldが使用される
-*/
-
-//定義
-function* rainbow() {
-  yield "赤";
-  yield "青";
-  yield "黄";
-}
-
-// 使用
-const it = rainbow(); //イテレータを取得
-console.log(it.next()); //赤
-console.log(it.next()); //青
-console.log(it.next()); //黄
-
-/* 総評
-イテレータは反復可能な要素にしたり
-ジェネレータを使い、遅延する・必要に成るまで計算をしないでおく、といった柔軟な使い方ができる
+/*
+ただ、数値・文字列・真偽値をリテラルとしてオブジェクトを作ると、返される値はプリミティブ値として生成される
+このnum str bolの値がオブジェクトとして使用されようとするとき、初めてオブジェクトの機能が生成される
+が、そのメソッドが実行された後はラッパーオブジェクトを破棄し、プリミティブ型に戻る
 */
