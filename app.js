@@ -1,26 +1,35 @@
-// オブジェクトの基本;
-// カスタムコンストラクタ関数で作られたオブジェクト名は、最初は大文字にすべし
+/* 関数の基本・おさらい
+関数の定義・４種類
+・関数コンストラクタ
+・関数宣言
+・関数式（無名）
+・関数式（名前つき）
+*/
 
-/* new演算子とコンストラクタ関数でのインスタンス化・及びネイティブコンストラクタでのオブジェクト化 */
-let myNumber = new Number(29);
-let myString = new String("Tomoya");
-let myBoolean = new Boolean(true);
-let myObject = new Object();
-let myArray = new Array("unko", "tinko");
-let myFunction = new Function("x", "y", "return x*y");
-let myDate = new Date();
-let myRegExp = new RegExp("\bt[a-z]+\b");
-let myError = new Error("Error!");
+//関数コンストラクタ＿実際にこの方式が使われることはない
+let addConstructor = new Function("x", "y", "return x + y");
 
-console.log(myNumber.constructor);
+//関数宣言_function文
+function addStatement(x, y) {
+  return x + y;
+}
 
-// 通常はリテラルを使用してオブジェクトを設定する
-let myFunction = function(x, y) {
-  return x * y;
+//関数式（無名）
+let addExpression = function(x, y) {
+  return x + y;
 };
 
-/*
-ただ、数値・文字列・真偽値をリテラルとしてオブジェクトを作ると、返される値はプリミティブ値として生成される
-このnum str bolの値がオブジェクトとして使用されようとするとき、初めてオブジェクトの機能が生成される
-が、そのメソッドが実行された後はラッパーオブジェクトを破棄し、プリミティブ型に戻る
-*/
+//関数式（名前付き）＿関数内で関数自身を指定する場合に使用
+let addNameExpression = function addNameExpression(x, y) {
+  return x + y;
+};
+
+//関数式のパターン（無名）
+let add = function(x, y) {
+  if (typeof x !== "number" || typeof y !== "number") {
+    return "pass in numbers";
+  }
+  return x + y;
+};
+console.log(add(3, 2));
+console.log(add("3", "2"));
